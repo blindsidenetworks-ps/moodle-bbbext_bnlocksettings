@@ -23,4 +23,28 @@
  * @author    Shamiso Jaravaza (shamiso.jaravaza@blindsidenetworks.com)
  */
 
-defined('MOODLE_INTERNAL') || die;
+defined('MOODLE_INTERNAL') || die();
+
+$addsetting = function($settings, $name) {
+    $options = [
+        'enable' => get_string("settings_enable", 'bbbext_bnlocksettings'),
+        'disable' => get_string("settings_disable", 'bbbext_bnlocksettings'),
+        'editable' => get_string("settings_editable", 'bbbext_bnlocksettings'),
+    ];
+
+    $settings->add(new admin_setting_configselect(
+        "bbbext_bnlocksettings/{$name}_settings",
+        get_string("settings_{$name}", 'bbbext_bnlocksettings'),
+        get_string("settings_{$name}_description", 'bbbext_bnlocksettings'),
+        'editable',
+        $options
+    ));
+};
+
+$addsetting($settings, 'enablecam');
+$addsetting($settings, 'enablemic');
+$addsetting($settings, 'enableprivatechat');
+$addsetting($settings, 'enablepublicchat');
+$addsetting($settings, 'enablenote');
+$addsetting($settings, 'enableuserlist');
+

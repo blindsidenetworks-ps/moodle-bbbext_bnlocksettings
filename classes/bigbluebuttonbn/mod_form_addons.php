@@ -113,7 +113,7 @@ class mod_form_addons extends \mod_bigbluebuttonbn\local\extension\mod_form_addo
             'disablepublicchat',
             'disablenote',
             'hideuserlist',
-            'no_locksettings'
+            'no_locksettings',
         ];
         foreach ($lockelements as $lockelement) {
             if ($this->mform->elementExists($lockelement)) {
@@ -123,30 +123,50 @@ class mod_form_addons extends \mod_bigbluebuttonbn\local\extension\mod_form_addo
     }
 
     /**
-     * Add new form field definition
+     * Add new form field definition.
+     *
+     * @return void
      */
     public function add_fields(): void {
-        $this->mform->addElement('header', 'bnlocksettings', get_string('mod_form_lockoverride_header', 'bbbext_bnlocksettings'));
-        $this->mform->addElement('checkbox', 'enablecam', get_string('mod_form_overridecam', 'bbbext_bnlocksettings'));
-        $this->mform->addElement('checkbox', 'enablemic', get_string('mod_form_overridemic', 'bbbext_bnlocksettings'));
-        $this->mform->addElement('checkbox', 'enableprivatechat', get_string('mod_form_overrideprivatechat', 'bbbext_bnlocksettings'));
-        $this->mform->addElement('checkbox', 'enablepublicchat', get_string('mod_form_overridepublicchat', 'bbbext_bnlocksettings'));
-        $this->mform->addElement('checkbox', 'enablenote', get_string('mod_form_overridenote', 'bbbext_bnlocksettings'));
-        $this->mform->addElement('checkbox', 'enableuserlist', get_string('mod_form_overrideuserlist', 'bbbext_bnlocksettings'));
+        $this->mform->addElement('header', 'bnlocksettings', get_string('pluginname', 'bbbext_bnlocksettings'));
+        $editsettings = false;
+        $config = get_config('bbbext_bnlocksettings');
+        $locksettings = [
+            'enablecam' => 'mod_form_overridecam',
+            'enablemic' => 'mod_form_overridemic',
+            'enableprivatechat' => 'mod_form_overrideprivatechat',
+            'enablepublicchat' => 'mod_form_overridepublicchat',
+            'enablenote' => 'mod_form_overridenote',
+            'enableuserlist' => 'mod_form_overrideuserlist',
+        ];
 
-        $this->mform->setType('enablecam', PARAM_INT);
-        $this->mform->setType('enablemic', PARAM_INT);
-        $this->mform->setType('enableprivatechat', PARAM_INT);
-        $this->mform->setType('enablepublicchat', PARAM_INT);
-        $this->mform->setType('enablenote', PARAM_INT);
-        $this->mform->setType('enableuserlist', PARAM_INT);
+        // Check if setting should be shown in the activity.
+        foreach ($locksettings as $configname => $string) {
+            if ($config->{$configname . '_settings'} === 'editable') {
+                $this->add_checkbox_field($configname, $string);
+                $editsettings = true;
+            } else {
+                $this->mform->addElement('hidden', $configname, 0);
+                $this->mform->setType($configname, PARAM_INT);
+            }
+        }
+        // Output a string if no settings are editable.
+        if (!$editsettings) {
+            $this->mform->addElement('static', 'no_settings', '', get_string('mod_form_no_settings', 'bbbext_bnlocksettings'));
+        }
+    }
 
-        $this->mform->setDefault('enablecam', 1);
-        $this->mform->setDefault('enablemic', 1);
-        $this->mform->setDefault('enableprivatechat', 1);
-        $this->mform->setDefault('enablepublicchat', 1);
-        $this->mform->setDefault('enablenote', 1);
-        $this->mform->setDefault('enableuserlist', 1);
+    /**
+     * Helper method to add a checkbox element to the form.
+     *
+     * @param string $name The name of the checkbox.
+     * @param string $string The string for the field.
+     * @return void
+     */
+    private function add_checkbox_field(string $name, string $string): void {
+        $this->mform->addElement('checkbox', $name, get_string($string, 'bbbext_bnlocksettings'));
+        $this->mform->setType($name, PARAM_INT);
+        $this->mform->setDefault($name, 1);
     }
 
     /**

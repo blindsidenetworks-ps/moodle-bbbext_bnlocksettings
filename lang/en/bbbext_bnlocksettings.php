@@ -24,12 +24,33 @@
  */
 
 defined('MOODLE_INTERNAL') || die();
-$string['mod_form_lockoverride_header'] = 'Override Lock Settings';
+$string['mod_form_no_settings'] = 'No lock settings can be edited';
 $string['mod_form_overridecam'] = 'Enable webcam';
 $string['mod_form_overridemic'] = 'Enable microphone';
+$string['mod_form_overridenote'] = 'Enable shared notes';
 $string['mod_form_overrideprivatechat'] = 'Enable private chat';
 $string['mod_form_overridepublicchat'] = 'Enable public chat';
-$string['mod_form_overridenote'] = 'Enable shared notes';
 $string['mod_form_overrideuserlist'] = 'Enable user list';
+
 $string['pluginname'] = 'BN Lock Settings';
 
+$string['settings_disable'] = 'Disable by default';
+$string['settings_editable'] = 'Edit default per activity';
+$string['settings_enable'] = 'Enable by default';
+$string['settings_enablecam'] = 'Webcam settings';
+$string['settings_enablecam_description'] = 'If enabled webcam use is allowed';
+$string['settings_enablemic'] = 'Microphone settings';
+$string['settings_enablemic_description'] = 'If enabled microphone use is allowed';
+$string['settings_enablenote'] = 'Shared notes settings';
+$string['settings_enablenote_description'] = 'If enabled shared notes can be edited';
+$string['settings_enableprivatechat'] = 'Private chat settings';
+$string['settings_enableprivatechat_description'] = 'If enabled users can engage in private chats in the session';
+$string['settings_enablepublicchat'] = 'Public chat settings';
+$string['settings_enablepublicchat_description'] = 'If enabled users can engage in public chats in the session';
+$string['settings_enableuserlist'] = 'User list settings';
+$string['settings_enableuserlist_description'] = 'If enabled user list can be seen';
+
+$string['settings_header_chat'] = 'Chat Configuration';
+$string['settings_header_notes'] = 'Shared Notes Configuration';
+$string['settings_header_userlist'] = 'User List Configuration';
+$string['settings_header_webcam'] = 'Webcam and Microphone Configuration';

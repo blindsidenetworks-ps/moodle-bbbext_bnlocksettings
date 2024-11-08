@@ -16,7 +16,7 @@
 
 namespace bbbext_bnlocksettings\bigbluebuttonbn;
 
-use bbbext_bnlocksettings\utils;
+use bbbext_bnlocksettings\lock;
 
 /**
  * A single action class to mutate the action URL.
@@ -40,7 +40,7 @@ class action_url_addons extends \mod_bigbluebuttonbn\local\extension\action_url_
      */
     public function execute(string $action = '', array $data = [], array $metadata = [], ?int $instanceid = null): array {
         if ($instanceid && $action == 'create') {
-            $locksettings = utils::get_lock_settings($instanceid);
+            $locksettings = lock::get_lock_settings($instanceid);
             if ($locksettings) {
                 foreach ($locksettings as $locksetting => $lockvalue) {
                     $data[$locksetting] = $lockvalue;

@@ -19,14 +19,14 @@ namespace bbbext_bnlocksettings;
 use bbbext_bnlocksettings\bigbluebuttonbn\mod_instance_helper;
 
 /**
- * BBB Utils class
+ * BBB Lock class
  *
  * @package   bbbext_bnlocksettings
  * @copyright 2023 onwards, Blindside Networks Inc
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  * @author    Shamiso Jaravaza (shamiso.jaravaza@blindsidenetworks.com)
  */
-class utils {
+class lock {
     /**
      * Get lock settings that need to be passed.
      * @param int $instanceid
