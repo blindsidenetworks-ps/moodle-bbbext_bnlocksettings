@@ -32,7 +32,7 @@ $string['mod_form_overrideprivatechat'] = 'Enable private chat';
 $string['mod_form_overridepublicchat'] = 'Enable public chat';
 $string['mod_form_overrideuserlist'] = 'Enable user list';
 
-$string['pluginname'] = 'BN Lock Settings';
+$string['pluginname'] = 'BigBlueButton BN Lock Settings';
 
 $string['settings_disable'] = 'Disable by default';
 $string['settings_editable'] = 'Edit default per activity';
