@@ -53,16 +53,18 @@ class lock {
      * Get configuration at subplugin or activity level.
      *
      * @param string $settingname the name of the lock setting
-     * @param object $lockconfig the subplugin settings
+     * @param ?object $lockconfig the subplugin settings
      * @param int $instanceid
      * @return string The value of the lock
      */
-    private static function get_setting(string $settingname, object $lockconfig, int $instanceid) {
-        if ($lockconfig->{$settingname . '_settings'} === 'editable') {
+    private static function get_setting(string $settingname, ?object $lockconfig, int $instanceid) {
+        $mode = $lockconfig->{$settingname . '_settings'} ?? '';
+        if ($mode === 'editable') {
             return self::get_editable_value($settingname, $instanceid);
         }
         return self::get_default_value($settingname, $lockconfig);
     }
+
 
     /**
      * Get activity lock setting.
@@ -87,12 +89,13 @@ class lock {
      * Get subplugin default lock setting.
      *
      * @param string $lockname
-     * @param object $config setting value
+     * @param ?object $config setting value
      * @return array
      */
-    private static function get_default_value(string $lockname, object $config) {
-        if ($config->{$lockname . '_settings'} === 'disable') {
-            // We need to invert boolean values to match API.
+    private static function get_default_value(string $lockname, ?object $config) {
+        $mode = $config->{$lockname . '_settings'} ?? '';
+        // We need to invert boolean values to match API.
+        if ($mode === 'disable') {
             return 'true';
         }
         return 'false';
