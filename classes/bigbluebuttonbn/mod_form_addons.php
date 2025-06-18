@@ -142,7 +142,9 @@ class mod_form_addons extends \mod_bigbluebuttonbn\local\extension\mod_form_addo
 
         // Check if setting should be shown in the activity.
         foreach ($locksettings as $configname => $string) {
-            if ($config->{$configname . '_settings'} === 'editable') {
+            // TODO: Simplify this when we have a better way to handle config in core phpunit tests.
+            $mode = is_object($config) ? ($config->{$configname . '_settings'} ?? '') : '';
+            if ($mode === 'editable') {
                 $this->add_checkbox_field($configname, $string);
                 $editsettings = true;
             } else {
